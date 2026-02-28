@@ -4,9 +4,46 @@ const taskList = document.getElementById('task-list');
 const taskCount = document.getElementById('task-count');
 const clearCompletedBtn = document.getElementById('clear-completed');
 const filterBtns = document.querySelectorAll('.filter-btn');
+const themeSelect = document.getElementById('theme-select');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let currentFilter = 'all';
+let userHasSelectedTheme = localStorage.getItem('theme') !== null;
+
+function getSystemThemePreference() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function getEffectiveTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    return savedTheme;
+  }
+  return getSystemThemePreference();
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeSelect.value = theme;
+}
+
+function initTheme() {
+  const theme = getEffectiveTheme();
+  applyTheme(theme);
+}
+
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+mediaQuery.addEventListener('change', (e) => {
+  if (!userHasSelectedTheme) {
+    applyTheme(e.matches ? 'dark' : 'light');
+  }
+});
+
+themeSelect.addEventListener('change', (e) => {
+  userHasSelectedTheme = true;
+  localStorage.setItem('theme', e.target.value);
+  applyTheme(e.target.value);
+});
 
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -101,4 +138,5 @@ filterBtns.forEach(btn => {
   });
 });
 
+initTheme();
 renderTasks();

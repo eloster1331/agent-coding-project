@@ -4,11 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Tracker</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <h1>Task Tracker</h1>
+    <select id="theme-select" class="theme-dropdown">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="crimson">Crimson</option>
+    </select>
     
     <form id="task-form">
       <input type="text" id="task-input" placeholder="Add a new task..." required>

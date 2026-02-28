@@ -4,9 +4,67 @@
   padding: 0;
 }
 
+:root {
+  --bg-color: #f5f5f5;
+  --container-bg: #ffffff;
+  --text-color: #333333;
+  --border-color: #dddddd;
+  --accent-color: #007bff;
+  --accent-hover: #0056b3;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
+  --secondary-color: #6c757d;
+  --secondary-hover: #5a6268;
+  --muted-color: #999999;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --container-bg: #2d2d2d;
+  --text-color: #e0e0e0;
+  --border-color: #444444;
+  --accent-color: #4A90D9;
+  --accent-hover: #3a7bc8;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
+  --secondary-color: #6c757d;
+  --secondary-hover: #5a6268;
+  --muted-color: #aaaaaa;
+}
+
+[data-theme="crimson"] {
+  --bg-color: #0a0a0a;
+  --container-bg: #1a1a1a;
+  --text-color: #ff4444;
+  --border-color: #333333;
+  --accent-color: #cc0000;
+  --accent-hover: #ff0000;
+  --danger-color: #990000;
+  --danger-hover: #cc0000;
+  --secondary-color: #444444;
+  --secondary-hover: #666666;
+  --muted-color: #aa3333;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-color: #1a1a1a;
+    --container-bg: #2d2d2d;
+    --text-color: #e0e0e0;
+    --border-color: #444444;
+    --accent-color: #4A90D9;
+    --accent-hover: #3a7bc8;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+    --muted-color: #aaaaaa;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f5f5f5;
+  background: var(--bg-color);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -14,18 +72,39 @@ body {
 }
 
 .container {
-  background: white;
+  background: var(--container-bg);
   width: 100%;
   max-width: 500px;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--container-bg);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.theme-dropdown:focus {
+  outline: none;
+  border-color: var(--accent-color);
 }
 
 h1 {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #333;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  color: var(--text-color);
 }
 
 #task-form {
@@ -37,19 +116,21 @@ h1 {
 #task-input {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 1rem;
+  background: var(--container-bg);
+  color: var(--text-color);
 }
 
 #task-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--accent-color);
 }
 
 button[type="submit"] {
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: var(--accent-color);
   color: white;
   border: none;
   border-radius: 4px;
@@ -58,7 +139,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: #0056b3;
+  background: var(--accent-hover);
 }
 
 .filters {
@@ -69,16 +150,17 @@ button[type="submit"]:hover {
 
 .filter-btn {
   padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  background: white;
+  border: 1px solid var(--border-color);
+  background: var(--container-bg);
+  color: var(--text-color);
   border-radius: 4px;
   cursor: pointer;
 }
 
 .filter-btn.active {
-  background: #007bff;
+  background: var(--accent-color);
   color: white;
-  border-color: #007bff;
+  border-color: var(--accent-color);
 }
 
 #task-list {
@@ -90,19 +172,21 @@ button[type="submit"]:hover {
   display: flex;
   align-items: center;
   padding: 0.75rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
   gap: 0.5rem;
+  color: var(--text-color);
 }
 
 .task-item.completed span {
   text-decoration: line-through;
-  color: #999;
+  color: var(--muted-color);
 }
 
 .task-item input[type="checkbox"] {
   width: 18px;
   height: 18px;
   cursor: pointer;
+  accent-color: var(--accent-color);
 }
 
 .task-item span {
@@ -112,7 +196,7 @@ button[type="submit"]:hover {
 
 .delete-btn {
   padding: 0.25rem 0.5rem;
-  background: #dc3545;
+  background: var(--danger-color);
   color: white;
   border: none;
   border-radius: 4px;
@@ -121,20 +205,20 @@ button[type="submit"]:hover {
 }
 
 .delete-btn:hover {
-  background: #c82333;
+  background: var(--danger-hover);
 }
 
 .stats {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #666;
+  color: var(--muted-color);
   font-size: 0.875rem;
 }
 
 #clear-completed {
   padding: 0.5rem 1rem;
-  background: #6c757d;
+  background: var(--secondary-color);
   color: white;
   border: none;
   border-radius: 4px;
@@ -142,5 +226,5 @@ button[type="submit"]:hover {
 }
 
 #clear-completed:hover {
-  background: #5a6268;
+  background: var(--secondary-hover);
 }
