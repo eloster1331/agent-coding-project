@@ -20,10 +20,12 @@ python -m http.server 8000
 - Filter: All / Active / Completed
 - LocalStorage persistence
 - Clear completed
+- Theme switching (Light / Dark / Crimson)
+- Automatic dark mode based on browser preference
 
 ### Practice Ideas
 Try asking me to:
-1. Add dark mode
+1. ~~Add dark mode~~ ✅ Done!
 2. Add priority levels (high/medium/low)
 3. Add task categories/tags
 4. Add due dates
