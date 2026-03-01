@@ -138,5 +138,22 @@ filterBtns.forEach(btn => {
   });
 });
 
+if (typeof window !== 'undefined') {
+  window.tasks = tasks;
+  window.currentFilter = currentFilter;
+  window.userHasSelectedTheme = userHasSelectedTheme;
+  window.getSystemThemePreference = getSystemThemePreference;
+  window.getEffectiveTheme = getEffectiveTheme;
+  window.applyTheme = applyTheme;
+  window.initTheme = initTheme;
+  window.saveTasks = saveTasks;
+  window.renderTasks = renderTasks;
+  window.addTask = addTask;
+  window.toggleTask = toggleTask;
+  window.deleteTask = deleteTask;
+  window.clearCompleted = clearCompleted;
+  window.updateCount = updateCount;
+}
+
 initTheme();
 renderTasks();
